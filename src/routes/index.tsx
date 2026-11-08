@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import photo from "@/assets/marcus-luz-advogado.jpg.asset.json";
 
 const WHATSAPP = "https://wa.me/5567992209167";
 const MAPS = "https://www.google.com/maps/search/?api=1&query=Rua+General+Os%C3%B3rio%2C+52+-+Centro%2C+Campo+Grande+-+MS%2C+79008-310";
@@ -76,11 +77,13 @@ function Index() {
           <div className="mt-10"><CTA /></div>
         </div>
         <div className="md:col-span-7">
-          {/* Substituir pela fotografia horizontal oficial do advogado */}
-          <div className="flex aspect-[3/2] w-full items-end bg-secondary p-6">
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              Espaço reservado para a fotografia oficial
-            </p>
+          <div className="ml-auto max-w-md overflow-hidden bg-secondary">
+            <img
+              src={photo.url}
+              alt="Marcus Vinicius Rodrigues da Luz, advogado, de terno azul"
+              className="aspect-[47/54] w-full object-cover object-top"
+              fetchPriority="high"
+            />
           </div>
         </div>
       </section>
