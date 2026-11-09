@@ -5,4 +5,7 @@
 - [x] Centralizar contato e neutralizar informações não confirmadas.
 - [x] Revisar semântica, foco, contraste e metadados; imagem de compartilhamento usa o host real da prévia, a atualizar na hospedagem definitiva.
 - [x] Testar navegação, foto, WhatsApp e Maps em computador, tablet e celular; lint sem erros (seis avisos preexistentes), quatro testes aprovados e compilação automática OK.
-- [x] Informar pendências do escritório, sem publicar: WhatsApp, endereço, OAB, áreas e textos institucionais, autorização de uso da foto e host definitivo para compartilhamento.
+- [x] Informar pendências da revisão anterior, sem publicar.
+- [x] Aplicar última revisão: WhatsApp confirmado, retirar avisos públicos, ocultar endereço e mapa, neutralizar áreas de atuação; preservar nome, OAB, foto, visual e metadados.
+- [x] Testar navegação, foto e contatos em computador, tablet e celular: WhatsApp abriu com número e mensagem corretos; cinco testes aprovados, lint sem erros (seis avisos preexistentes), compilação automática OK.
+- [x] Apresentar resultado e confirmações restantes: endereço completo, áreas e descrições dos serviços e autorização da foto; sem publicar.

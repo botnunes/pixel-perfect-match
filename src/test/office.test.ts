@@ -1,11 +1,23 @@
 import { describe, expect, it } from "vitest";
-import { WHATSAPP_NUMBER, WHATSAPP_URL, WHATSAPP_DISPLAY, MAPS_URL } from "@/lib/office";
+import {
+  WHATSAPP_NUMBER,
+  WHATSAPP_URL,
+  WHATSAPP_DISPLAY,
+  MAPS_URL,
+  OFFICE_ADDRESS_CONFIRMED,
+  PUBLIC_OFFICE_ADDRESS,
+} from "@/lib/office";
 
 describe("Office contact", () => {
-  it("preserves the existing number while confirmation is pending", () => {
+  it("uses the confirmed official number for display and destination", () => {
     expect(WHATSAPP_NUMBER).toBe("5567992209167");
     expect(new URL(WHATSAPP_URL).pathname).toBe("/5567992209167");
     expect(WHATSAPP_DISPLAY).toBe("+55 (67) 99220-9167");
+  });
+
+  it("keeps the unconfirmed full address and map disabled, exposing only the city", () => {
+    expect(OFFICE_ADDRESS_CONFIRMED).toBe(false);
+    expect(PUBLIC_OFFICE_ADDRESS).toBe("Campo Grande — MS");
   });
 
   it("prefills the exact requested WhatsApp message", () => {
