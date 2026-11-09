@@ -1,21 +1,39 @@
 import { createFileRoute } from "@tanstack/react-router";
-import photo from "@/assets/marcus-luz-advogado.jpg.asset.json";
+import { useState } from "react";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetClose } from "@/components/ui/sheet";
+import {
+  WHATSAPP_URL,
+  WHATSAPP_DISPLAY,
+  OFFICE_ADDRESS,
+  MAPS_URL,
+  MAPS_EMBED,
+  OFFICE_PHOTO,
+} from "@/lib/office";
 
-const WHATSAPP_MESSAGE =
-  "Olá! Acessei o site do Marcus Luz & Advogados Associados e gostaria de obter informações sobre o atendimento.";
-const WHATSAPP = `https://wa.me/5567992209167?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-const MAPS = "https://www.google.com/maps/search/?api=1&query=Rua+General+Os%C3%B3rio%2C+52+-+Centro%2C+Campo+Grande+-+MS%2C+79008-310";
-const ADDRESS = "Rua General Osório, 52 — Centro, Campo Grande — MS, CEP 79008-310";
+// The existing preview host is real; do not infer a future domain or canonical URL.
+const SHARE_PHOTO = `https://id-preview--f3a143c3-2e2a-4700-b8fe-59cdb738e298.lovable.app${OFFICE_PHOTO}`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Marcus Luz & Advogados Associados — Campo Grande, MS" },
-      { name: "description", content: "Escritório de advocacia em Campo Grande — MS. Direito Militar, Previdenciário e Civil. Atendimento com ética e responsabilidade." },
+      {
+        name: "description",
+        content:
+          "Marcus Luz & Advogados Associados — escritório de advocacia em Campo Grande — MS. Informações institucionais e contato.",
+      },
       { property: "og:title", content: "Marcus Luz & Advogados Associados" },
-      { property: "og:description", content: "Advocacia com compromisso, ética e responsabilidade, em Campo Grande — MS." },
+      {
+        property: "og:description",
+        content: "Advocacia com compromisso, ética e responsabilidade, em Campo Grande — MS.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: SHARE_PHOTO },
+      { property: "og:image:alt", content: "Marcus Vinicius Rodrigues da Luz, de terno azul" },
+      { name: "twitter:image", content: SHARE_PHOTO },
     ],
   }),
   component: Index,
@@ -30,37 +48,93 @@ const nav = [
 ];
 
 const areas = [
-  ["I", "Direito Militar", "Orientação jurídica em questões relacionadas à carreira e aos direitos de servidores militares."],
-  ["II", "Direito Previdenciário", "Orientação sobre benefícios, aposentadorias e demais questões junto à previdência."],
-  ["III", "Direito Civil", "Assessoria em relações contratuais, obrigações, responsabilidade civil e demais temas do direito privado."],
+  [
+    "I",
+    "Direito Militar",
+    "Orientação jurídica em questões relacionadas à carreira e aos direitos de servidores militares.",
+  ],
+  [
+    "II",
+    "Direito Previdenciário",
+    "Orientação sobre benefícios, aposentadorias e demais questões junto à previdência.",
+  ],
+  [
+    "III",
+    "Direito Civil",
+    "Assessoria em relações contratuais, obrigações, responsabilidade civil e demais temas do direito privado.",
+  ],
 ];
 
 function CTA() {
   return (
-    <a
-      href={WHATSAPP}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-3 bg-primary px-7 py-4 text-sm tracking-wide text-primary-foreground transition-colors hover:bg-foreground"
-    >
-      Entre em contato <span aria-hidden>→</span>
-    </a>
+    <Button asChild className="h-auto rounded-none px-7 py-4 font-normal shadow-none">
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="gap-3 tracking-wide hover:bg-foreground"
+      >
+        Entre em contato <span aria-hidden>→</span>
+      </a>
+    </Button>
   );
 }
 
 function Index() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="min-h-screen">
       <header className="absolute inset-x-0 top-0 z-10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
-          <a href="#" className="font-serif text-xl text-foreground">
+        <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 py-6 md:px-10">
+          <a href="#conteudo" className="min-w-0 font-serif text-xl text-foreground">
             Marcus Luz <span className="italic text-primary">&amp;</span> Advogados
           </a>
-          <nav className="hidden gap-8 text-sm text-muted-foreground md:flex" aria-label="Principal">
+          <nav
+            className="hidden gap-6 text-sm text-muted-foreground lg:flex"
+            aria-label="Principal"
+          >
             {nav.map(([l, h]) => (
-              <a key={h} href={h} className="hover:text-foreground">{l}</a>
+              <a key={h} href={h} className="hover:text-foreground">
+                {l}
+              </a>
             ))}
           </nav>
+          <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="min-h-11 min-w-11 shrink-0 lg:hidden"
+                aria-label="Abrir menu"
+                aria-controls="menu-mobile"
+                aria-expanded={menuOpen}
+              >
+                <Menu aria-hidden="true" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              id="menu-mobile"
+              side="right"
+              aria-describedby={undefined}
+              className="w-[min(85vw,24rem)]"
+            >
+              <SheetTitle className="pr-12 font-serif text-2xl font-medium">
+                Marcus Luz &amp; Advogados
+              </SheetTitle>
+              <nav
+                aria-label="Navegação mobile"
+                className="mt-10 flex flex-col divide-y divide-border"
+              >
+                {nav.map(([label, href]) => (
+                  <SheetClose asChild key={href}>
+                    <a href={href} className="flex min-h-12 items-center py-4 text-foreground">
+                      {label}
+                    </a>
+                  </SheetClose>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </header>
 
@@ -74,15 +148,19 @@ function Index() {
           <p className="mt-8 max-w-md text-lg font-light text-muted-foreground">
             Conheça Marcus Luz &amp; Advogados Associados, em Campo Grande — MS.
           </p>
-          <div className="mt-10"><CTA /></div>
+          <div className="mt-10">
+            <CTA />
+          </div>
         </div>
         <div className="md:col-span-7">
           <div className="ml-auto max-w-md overflow-hidden bg-secondary">
             <img
-              src={photo.url}
+              src={OFFICE_PHOTO}
               alt="Marcus Vinicius Rodrigues da Luz, advogado, de terno azul"
               className="aspect-[47/54] w-full object-cover object-top"
               fetchPriority="high"
+              width={470}
+              height={540}
             />
           </div>
         </div>
@@ -93,20 +171,25 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 md:grid-cols-12 md:px-10 md:py-32">
           <div className="md:col-span-4">
             <p className="eyebrow">O escritório</p>
-            <h2 className="mt-5 text-4xl text-foreground md:text-5xl">Atendimento próximo e transparente.</h2>
+            <h2 className="mt-5 text-4xl text-foreground md:text-5xl">
+              Atendimento próximo e transparente.
+            </h2>
           </div>
           <div className="space-y-6 text-lg font-light leading-relaxed text-muted-foreground md:col-span-6 md:col-start-7">
             <p>
-              Marcus Luz &amp; Advogados Associados é um escritório de advocacia sediado no Centro de Campo Grande,
-              dedicado a oferecer orientação jurídica clara a quem busca compreender seus direitos.
+              Marcus Luz &amp; Advogados Associados é um escritório de advocacia em Campo Grande —
+              MS. Esta página reúne sua apresentação institucional e os canais de contato para
+              informações sobre o atendimento.
             </p>
             <p>
-              Nossa atuação se pauta pela ética profissional, pelo sigilo e pela comunicação franca com cada cliente,
-              em conformidade com as normas da Ordem dos Advogados do Brasil.
+              A orientação jurídica exige análise das particularidades de cada situação, observância
+              do sigilo profissional e respeito às normas da Ordem dos Advogados do Brasil.
             </p>
             <div className="grid grid-cols-3 gap-6 border-t border-border pt-8 text-sm text-foreground">
               {["Ética", "Sigilo", "Clareza"].map((v) => (
-                <p key={v} className="font-serif text-2xl">{v}</p>
+                <p key={v} className="font-serif text-2xl">
+                  {v}
+                </p>
               ))}
             </div>
           </div>
@@ -116,11 +199,16 @@ function Index() {
       {/* Áreas */}
       <section id="atuacao" className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
         <p className="eyebrow">Áreas de atuação</p>
-        <h2 className="mt-5 max-w-xl text-4xl text-foreground md:text-5xl">Campos em que oferecemos orientação.</h2>
+        <h2 className="mt-5 max-w-xl text-4xl text-foreground md:text-5xl">
+          Informações sobre atuação jurídica.
+        </h2>
+        <p className="mt-6 max-w-xl text-sm text-muted-foreground">
+          Áreas e descrições apresentadas abaixo pendentes de aprovação pelo profissional.
+        </p>
         <div className="mt-16 divide-y divide-border border-y border-border">
           {areas.map(([n, t, d]) => (
             <div key={t} className="grid gap-4 py-10 md:grid-cols-12 md:items-baseline">
-              <span className="font-serif text-xl italic text-accent md:col-span-1">{n}</span>
+              <span className="font-serif text-xl italic text-primary md:col-span-1">{n}</span>
               <h3 className="text-3xl text-foreground md:col-span-4">{t}</h3>
               <p className="font-light text-muted-foreground md:col-span-6 md:col-start-7">{d}</p>
             </div>
@@ -133,30 +221,46 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 md:grid-cols-12 md:px-10 md:py-32">
           <div className="md:col-span-5">
             <p className="eyebrow">Profissional</p>
-            <h2 className="mt-5 text-4xl text-foreground md:text-5xl">Marcus Vinicius Rodrigues da Luz</h2>
+            <h2 className="mt-5 text-4xl text-foreground md:text-5xl">
+              Marcus Vinicius Rodrigues da Luz
+            </h2>
             <p className="mt-4 text-sm tracking-widest text-primary">ADVOGADO · OAB/MS 17.787</p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Registro profissional pendente de confirmação pelo escritório.
+            </p>
           </div>
           <p className="text-lg font-light leading-relaxed text-muted-foreground md:col-span-6 md:col-start-7 md:pt-12">
-            Responsável pela condução do escritório, atende pessoalmente os clientes, com dedicação ao estudo de cada caso
-            e à orientação sobre os caminhos jurídicos disponíveis.
+            Para informações sobre o profissional, a forma de atendimento e a análise de uma questão
+            jurídica, entre em contato com o escritório.
           </p>
         </div>
       </section>
 
       {/* Localização */}
-      <section id="localizacao" className="mx-auto grid max-w-7xl gap-12 px-6 py-24 md:grid-cols-12 md:px-10 md:py-32">
+      <section
+        id="localizacao"
+        className="mx-auto grid max-w-7xl gap-12 px-6 py-24 md:grid-cols-12 md:px-10 md:py-32"
+      >
         <div className="md:col-span-4">
           <p className="eyebrow">Localização</p>
-          <h2 className="mt-5 text-4xl text-foreground md:text-5xl">No Centro de Campo Grande.</h2>
-          <p className="mt-6 font-light text-muted-foreground">{ADDRESS}</p>
-          <a href={MAPS} target="_blank" rel="noopener noreferrer" className="mt-8 inline-block border-b border-primary pb-1 text-sm text-primary hover:text-foreground">
+          <h2 className="mt-5 text-4xl text-foreground md:text-5xl">Em Campo Grande — MS.</h2>
+          <p className="mt-6 font-light text-muted-foreground">{OFFICE_ADDRESS}</p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Endereço pendente de confirmação. Confirme com o escritório antes de se deslocar.
+          </p>
+          <a
+            href={MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-block border-b border-primary pb-1 text-sm text-primary hover:text-foreground"
+          >
             Abrir no Google Maps →
           </a>
         </div>
         <div className="md:col-span-7 md:col-start-6">
           <iframe
-            title="Mapa do escritório"
-            src="https://www.google.com/maps?q=Rua+General+Os%C3%B3rio,+52,+Campo+Grande+-+MS&output=embed"
+            title="Mapa do endereço informado, pendente de confirmação pelo escritório"
+            src={MAPS_EMBED}
             className="aspect-[4/3] w-full border-0 grayscale-[60%] sepia-[20%]"
             loading="lazy"
           />
@@ -169,11 +273,26 @@ function Index() {
           <div className="md:col-span-6">
             <p className="eyebrow">Contato</p>
             <h2 className="mt-5 text-4xl md:text-5xl">Converse com o escritório.</h2>
-            <div className="mt-10"><CTA /></div>
+            <div className="mt-10">
+              <CTA />
+            </div>
           </div>
           <dl className="space-y-6 text-sm font-light md:col-span-5 md:col-start-8">
-            <div><dt className="eyebrow">WhatsApp</dt><dd className="mt-2 text-lg">+55 (67) 99220-9167</dd></div>
-            <div><dt className="eyebrow">Endereço</dt><dd className="mt-2 text-lg">{ADDRESS}</dd></div>
+            <div>
+              <dt className="eyebrow">WhatsApp</dt>
+              <dd className="mt-2 text-lg">
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                  {WHATSAPP_DISPLAY}
+                </a>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Número pendente de confirmação pelo escritório.
+                </p>
+              </dd>
+            </div>
+            <div>
+              <dt className="eyebrow">Endereço</dt>
+              <dd className="mt-2 text-lg">{OFFICE_ADDRESS}</dd>
+            </div>
           </dl>
         </div>
       </section>
@@ -181,7 +300,11 @@ function Index() {
       <footer className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-12 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-10">
         <p className="font-serif text-lg text-foreground">Marcus Luz &amp; Advogados Associados</p>
         <nav className="flex flex-wrap gap-6" aria-label="Rodapé">
-          {nav.map(([l, h]) => <a key={h} href={h} className="hover:text-foreground">{l}</a>)}
+          {nav.map(([l, h]) => (
+            <a key={h} href={h} className="hover:text-foreground">
+              {l}
+            </a>
+          ))}
         </nav>
         <p>OAB/MS 17.787 · © {new Date().getFullYear()}</p>
       </footer>

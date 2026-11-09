@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep office contact data in a shared browser-safe module so display text and outgoing links cannot diverge.
+- Use the original local portrait in public/images for portable hosting; sharing metadata must reference a real existing host, never an invented canonical domain.
+- Place the single primary main landmark in the root layout and use the existing accessible dialog primitive for mobile navigation.
