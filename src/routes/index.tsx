@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import photo from "@/assets/marcus-luz-advogado.jpg.asset.json";
 
-const WHATSAPP = "https://wa.me/5567992209167";
+const WHATSAPP_MESSAGE =
+  "Olá! Acessei o site do Marcus Luz & Advogados Associados e gostaria de obter informações sobre o atendimento.";
+const WHATSAPP = `https://wa.me/5567992209167?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const MAPS = "https://www.google.com/maps/search/?api=1&query=Rua+General+Os%C3%B3rio%2C+52+-+Centro%2C+Campo+Grande+-+MS%2C+79008-310";
 const ADDRESS = "Rua General Osório, 52 — Centro, Campo Grande — MS, CEP 79008-310";
 
