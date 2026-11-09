@@ -83,7 +83,7 @@
   --card-foreground: oklch(0.38 0.022 60);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.38 0.022 60);
-  --primary: oklch(0.60 0.04 60);
+  --primary: oklch(0.52 0.04 60);
   --primary-foreground: oklch(0.99 0.004 80);
   --secondary: oklch(0.94 0.015 78);
   --secondary-foreground: oklch(0.38 0.022 60);
@@ -95,7 +95,7 @@
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(0.88 0.02 74);
   --input: oklch(0.88 0.02 74);
-  --ring: oklch(0.60 0.04 60);
+  --ring: oklch(0.52 0.04 60);
   --chart-1: oklch(0.60 0.04 60);
   --chart-2: oklch(0.78 0.04 72);
   --chart-3: oklch(0.38 0.022 60);
@@ -125,8 +125,17 @@
 @layer base {
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
-  h1, h2, h3 { font-family: var(--font-serif); font-weight: 500; letter-spacing: -0.01em; }
+  h1, h2, h3 { font-family: var(--font-serif); font-weight: 500; letter-spacing: 0; }
+  :where(a, button, [tabindex]):focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
+  section[id] { scroll-margin-top: 1.5rem; }
 }
 @utility eyebrow {
   font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-primary);
+}
+
+.skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; transform: translateY(-200%); background: var(--background); color: var(--foreground); padding: 0.75rem 1rem; }
+.skip-link:focus { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
