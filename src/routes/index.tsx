@@ -220,23 +220,27 @@ function Index() {
           <p className="eyebrow">Localização</p>
           <h2 className="mt-5 text-4xl text-foreground md:text-5xl">Em Campo Grande — MS.</h2>
           <p className="mt-6 font-light text-muted-foreground">{PUBLIC_OFFICE_ADDRESS}</p>
-          {OFFICE_ADDRESS_CONFIRMED && <a
-            href={MAPS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-block border-b border-primary pb-1 text-sm text-primary hover:text-foreground"
-          >
-            Abrir no Google Maps →
-          </a>}
+          {OFFICE_ADDRESS_CONFIRMED && (
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block border-b border-primary pb-1 text-sm text-primary hover:text-foreground"
+            >
+              Abrir no Google Maps →
+            </a>
+          )}
         </div>
-        {OFFICE_ADDRESS_CONFIRMED && <div className="md:col-span-7 md:col-start-6">
-          <iframe
-            title="Localização do escritório"
-            src={MAPS_EMBED}
-            className="aspect-[4/3] w-full border-0 grayscale-[60%] sepia-[20%]"
-            loading="lazy"
-          />
-        </div>}
+        {OFFICE_ADDRESS_CONFIRMED && (
+          <div className="md:col-span-7 md:col-start-6">
+            <iframe
+              title="Localização do escritório"
+              src={MAPS_EMBED}
+              className="aspect-[4/3] w-full border-0 grayscale-[60%] sepia-[20%]"
+              loading="lazy"
+            />
+          </div>
+        )}
       </section>
 
       {/* Contato */}

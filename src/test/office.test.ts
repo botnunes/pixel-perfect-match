@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
-  WHATSAPP_NUMBER, WHATSAPP_URL, WHATSAPP_DISPLAY, MAPS_URL,
-  OFFICE_ADDRESS_CONFIRMED, PUBLIC_OFFICE_ADDRESS,
+  WHATSAPP_NUMBER,
+  WHATSAPP_URL,
+  WHATSAPP_DISPLAY,
+  MAPS_URL,
+  OFFICE_ADDRESS_CONFIRMED,
+  PUBLIC_OFFICE_ADDRESS,
 } from "@/lib/office";
 
 describe("Office contact", () => {
