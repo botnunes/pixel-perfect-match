@@ -35,15 +35,13 @@ const areas = [
   ["III", "Direito Civil", "Assessoria em relações contratuais, obrigações, responsabilidade civil e demais temas do direito privado."],
 ];
 
-function CTA({ light }: { light?: boolean }) {
+function CTA() {
   return (
     <a
       href={WHATSAPP}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-3 px-7 py-4 text-sm tracking-wide transition-colors ${
-        light ? "bg-background text-foreground hover:bg-secondary" : "bg-primary text-primary-foreground hover:bg-foreground"
-      }`}
+      className="inline-flex items-center gap-3 bg-primary px-7 py-4 text-sm tracking-wide text-primary-foreground transition-colors hover:bg-foreground"
     >
       Entre em contato <span aria-hidden>→</span>
     </a>
@@ -166,16 +164,16 @@ function Index() {
       </section>
 
       {/* Contato */}
-      <section id="contato" className="bg-foreground text-background">
+      <section id="contato" className="bg-secondary text-secondary-foreground">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 md:grid-cols-12 md:px-10 md:py-28">
           <div className="md:col-span-6">
-            <p className="eyebrow text-accent">Contato</p>
+            <p className="eyebrow">Contato</p>
             <h2 className="mt-5 text-4xl md:text-5xl">Converse com o escritório.</h2>
-            <div className="mt-10"><CTA light /></div>
+            <div className="mt-10"><CTA /></div>
           </div>
           <dl className="space-y-6 text-sm font-light md:col-span-5 md:col-start-8">
-            <div><dt className="eyebrow text-accent">WhatsApp</dt><dd className="mt-2 text-lg">+55 (67) 99220-9167</dd></div>
-            <div><dt className="eyebrow text-accent">Endereço</dt><dd className="mt-2 text-lg">{ADDRESS}</dd></div>
+            <div><dt className="eyebrow">WhatsApp</dt><dd className="mt-2 text-lg">+55 (67) 99220-9167</dd></div>
+            <div><dt className="eyebrow">Endereço</dt><dd className="mt-2 text-lg">{ADDRESS}</dd></div>
           </dl>
         </div>
       </section>
