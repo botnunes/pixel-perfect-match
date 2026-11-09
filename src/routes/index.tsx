@@ -11,6 +11,7 @@ import {
   MAPS_URL,
   MAPS_EMBED,
   OFFICE_PHOTO,
+  OFFICE_SERVICES,
 } from "@/lib/office";
 
 // The existing preview host is real; do not infer a future domain or canonical URL.
@@ -48,9 +49,12 @@ const nav = [
   ["Contato", "#contato"],
 ];
 
-function CTA() {
+function CTA({ hero = false }: { hero?: boolean }) {
   return (
-    <Button asChild className="h-auto rounded-none px-7 py-4 font-normal shadow-none">
+    <Button
+      asChild
+      className={`h-auto rounded-none px-7 py-4 font-normal shadow-none ${hero ? "hero-contact" : ""}`}
+    >
       <a
         href={WHATSAPP_URL}
         target="_blank"
@@ -67,17 +71,15 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="min-h-screen">
-      <header className="absolute inset-x-0 top-0 z-10">
+      <header className="site-header absolute inset-x-0 top-0 z-10">
         <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 py-6 md:px-10">
-          <a href="#conteudo" className="min-w-0 font-serif text-xl text-foreground">
-            Marcus Luz <span className="italic text-primary">&amp;</span> Advogados
+          <a href="#inicio" className="brand-name min-w-0 font-serif text-xl">
+            Marcus Luz <span className="italic">&amp;</span> Advogados
+            <span className="brand-detail">Associados</span>
           </a>
-          <nav
-            className="hidden gap-6 text-sm text-muted-foreground lg:flex"
-            aria-label="Principal"
-          >
+          <nav className="hidden gap-6 text-sm lg:flex" aria-label="Principal">
             {nav.map(([l, h]) => (
-              <a key={h} href={h} className="hover:text-foreground">
+              <a key={h} href={h} className="header-link">
                 {l}
               </a>
             ))}
@@ -87,7 +89,7 @@ function Index() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="min-h-11 min-w-11 shrink-0 lg:hidden"
+                className="header-menu min-h-11 min-w-11 shrink-0 lg:hidden"
                 aria-label="Abrir menu"
                 aria-controls="menu-mobile"
                 aria-expanded={menuOpen}
@@ -122,31 +124,33 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section className="mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-32 md:grid-cols-12 md:px-10 md:pt-40">
-        <div className="md:col-span-5 md:pt-12">
-          <p className="eyebrow">Campo Grande — MS</p>
-          <h1 className="mt-6 text-5xl leading-[1.05] text-foreground md:text-6xl lg:text-7xl">
-            Advocacia com compromisso, <em className="text-primary">ética</em> e responsabilidade.
-          </h1>
-          <p className="mt-8 max-w-md text-lg font-light text-muted-foreground">
-            Conheça Marcus Luz &amp; Advogados Associados, em Campo Grande — MS.
-          </p>
-          <div className="mt-10">
-            <CTA />
+      <section id="inicio" className="office-hero">
+        <img
+          src={OFFICE_PHOTO}
+          alt="Marcus Vinicius Rodrigues da Luz, advogado, de terno azul"
+          className="hero-photo"
+          fetchPriority="high"
+          width={470}
+          height={540}
+        />
+        <div className="hero-overlay" aria-hidden="true" />
+        <div className="hero-inner mx-auto w-full max-w-7xl px-6 md:px-10">
+          <div className="hero-copy">
+            <h1 className="hero-title hero-enter">
+              Advocacia com compromisso, <em>ética</em> e responsabilidade.
+            </h1>
+            <p className="hero-subtitle hero-enter">
+              Marcus Luz &amp; Advogados Associados — atuação jurídica em Campo Grande, Mato Grosso
+              do Sul.
+            </p>
+            <div className="hero-action hero-enter">
+              <CTA hero />
+            </div>
           </div>
         </div>
-        <div className="md:col-span-7">
-          <div className="ml-auto max-w-md overflow-hidden bg-secondary">
-            <img
-              src={OFFICE_PHOTO}
-              alt="Marcus Vinicius Rodrigues da Luz, advogado, de terno azul"
-              className="aspect-[47/54] w-full object-cover object-top"
-              fetchPriority="high"
-              width={470}
-              height={540}
-            />
-          </div>
-        </div>
+        <a href="#sobre" className="hero-scroll" aria-label="Conhecer o escritório">
+          <span aria-hidden="true">↓</span>
+        </a>
       </section>
 
       {/* Sobre */}
@@ -160,9 +164,8 @@ function Index() {
           </div>
           <div className="space-y-6 text-lg font-light leading-relaxed text-muted-foreground md:col-span-6 md:col-start-7">
             <p>
-              Marcus Luz &amp; Advogados Associados é um escritório de advocacia em Campo Grande —
-              MS. Esta página reúne sua apresentação institucional e os canais de contato para
-              informações sobre o atendimento.
+              Marcus Luz &amp; Advogados Associados, em Campo Grande — MS, atua nas áreas de Direito
+              Militar, Direito Previdenciário e Direito Civil.
             </p>
             <p>
               A orientação jurídica exige análise das particularidades de cada situação, observância
@@ -183,14 +186,26 @@ function Index() {
       <section id="atuacao" className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
         <p className="eyebrow">Áreas de atuação</p>
         <h2 className="mt-5 max-w-xl text-4xl text-foreground md:text-5xl">
-          Informações sobre atuação jurídica.
+          Áreas de atuação jurídica.
         </h2>
-        <div className="mt-16 border-y border-border py-10">
-          <p className="max-w-3xl text-lg font-light leading-relaxed text-muted-foreground">
-            A atuação profissional envolve a análise individual de cada situação, considerando suas
-            particularidades e as normas aplicáveis. Para informações sobre os serviços oferecidos,
-            entre em contato com o escritório.
-          </p>
+        <div className="mt-16 divide-y divide-border border-y border-border">
+          {OFFICE_SERVICES.map((service, index) => (
+            <article
+              key={service.name}
+              className="grid gap-5 py-10 md:grid-cols-12 md:items-baseline"
+            >
+              <span
+                className="font-serif text-xl italic text-primary md:col-span-1"
+                aria-hidden="true"
+              >
+                {["I", "II", "III"][index]}
+              </span>
+              <h3 className="text-3xl text-foreground md:col-span-4">{service.name}</h3>
+              <p className="font-light leading-relaxed text-muted-foreground md:col-span-6 md:col-start-7">
+                {service.description}
+              </p>
+            </article>
+          ))}
         </div>
       </section>
 
