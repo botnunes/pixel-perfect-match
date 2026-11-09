@@ -18,12 +18,16 @@ describe("Office contact", () => {
 
   it("exposes the confirmed full office address and enables the map", () => {
     expect(OFFICE_ADDRESS_CONFIRMED).toBe(true);
-    expect(PUBLIC_OFFICE_ADDRESS).toBe("Rua General Osório, 52 — Centro, Campo Grande — MS, CEP 79008-310");
+    expect(PUBLIC_OFFICE_ADDRESS).toBe(
+      "Rua General Osório, 52 — Centro, Campo Grande — MS, CEP 79008-310",
+    );
   });
 
   it("offers exactly the three confirmed legal practice areas", () => {
-    expect(OFFICE_SERVICES.map(service => service.name)).toEqual([
-      "Direito Militar", "Direito Previdenciário", "Direito Civil",
+    expect(OFFICE_SERVICES.map((service) => service.name)).toEqual([
+      "Direito Militar",
+      "Direito Previdenciário",
+      "Direito Civil",
     ]);
   });
 

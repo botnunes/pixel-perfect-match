@@ -51,7 +51,10 @@ const nav = [
 
 function CTA({ hero = false }: { hero?: boolean }) {
   return (
-    <Button asChild className={`h-auto rounded-none px-7 py-4 font-normal shadow-none ${hero ? "hero-contact" : ""}`}>
+    <Button
+      asChild
+      className={`h-auto rounded-none px-7 py-4 font-normal shadow-none ${hero ? "hero-contact" : ""}`}
+    >
       <a
         href={WHATSAPP_URL}
         target="_blank"
@@ -74,10 +77,7 @@ function Index() {
             Marcus Luz <span className="italic">&amp;</span> Advogados
             <span className="brand-detail">Associados</span>
           </a>
-          <nav
-            className="hidden gap-6 text-sm lg:flex"
-            aria-label="Principal"
-          >
+          <nav className="hidden gap-6 text-sm lg:flex" aria-label="Principal">
             {nav.map(([l, h]) => (
               <a key={h} href={h} className="header-link">
                 {l}
@@ -125,14 +125,14 @@ function Index() {
 
       {/* Hero */}
       <section id="inicio" className="office-hero">
-            <img
-              src={OFFICE_PHOTO}
-              alt="Marcus Vinicius Rodrigues da Luz, advogado, de terno azul"
-              className="hero-photo"
-              fetchPriority="high"
-              width={470}
-              height={540}
-            />
+        <img
+          src={OFFICE_PHOTO}
+          alt="Marcus Vinicius Rodrigues da Luz, advogado, de terno azul"
+          className="hero-photo"
+          fetchPriority="high"
+          width={470}
+          height={540}
+        />
         <div className="hero-overlay" aria-hidden="true" />
         <div className="hero-inner mx-auto w-full max-w-7xl px-6 md:px-10">
           <div className="hero-copy">
@@ -140,12 +140,17 @@ function Index() {
               Advocacia com compromisso, <em>ética</em> e responsabilidade.
             </h1>
             <p className="hero-subtitle hero-enter">
-              Marcus Luz &amp; Advogados Associados — atuação jurídica em Campo Grande, Mato Grosso do Sul.
+              Marcus Luz &amp; Advogados Associados — atuação jurídica em Campo Grande, Mato Grosso
+              do Sul.
             </p>
-            <div className="hero-action hero-enter"><CTA hero /></div>
+            <div className="hero-action hero-enter">
+              <CTA hero />
+            </div>
           </div>
         </div>
-        <a href="#sobre" className="hero-scroll" aria-label="Conhecer o escritório"><span aria-hidden="true">↓</span></a>
+        <a href="#sobre" className="hero-scroll" aria-label="Conhecer o escritório">
+          <span aria-hidden="true">↓</span>
+        </a>
       </section>
 
       {/* Sobre */}
@@ -159,8 +164,8 @@ function Index() {
           </div>
           <div className="space-y-6 text-lg font-light leading-relaxed text-muted-foreground md:col-span-6 md:col-start-7">
             <p>
-              Marcus Luz &amp; Advogados Associados, em Campo Grande — MS, atua nas áreas de
-              Direito Militar, Direito Previdenciário e Direito Civil.
+              Marcus Luz &amp; Advogados Associados, em Campo Grande — MS, atua nas áreas de Direito
+              Militar, Direito Previdenciário e Direito Civil.
             </p>
             <p>
               A orientação jurídica exige análise das particularidades de cada situação, observância
@@ -185,10 +190,20 @@ function Index() {
         </h2>
         <div className="mt-16 divide-y divide-border border-y border-border">
           {OFFICE_SERVICES.map((service, index) => (
-            <article key={service.name} className="grid gap-5 py-10 md:grid-cols-12 md:items-baseline">
-              <span className="font-serif text-xl italic text-primary md:col-span-1" aria-hidden="true">{["I", "II", "III"][index]}</span>
+            <article
+              key={service.name}
+              className="grid gap-5 py-10 md:grid-cols-12 md:items-baseline"
+            >
+              <span
+                className="font-serif text-xl italic text-primary md:col-span-1"
+                aria-hidden="true"
+              >
+                {["I", "II", "III"][index]}
+              </span>
               <h3 className="text-3xl text-foreground md:col-span-4">{service.name}</h3>
-              <p className="font-light leading-relaxed text-muted-foreground md:col-span-6 md:col-start-7">{service.description}</p>
+              <p className="font-light leading-relaxed text-muted-foreground md:col-span-6 md:col-start-7">
+                {service.description}
+              </p>
             </article>
           ))}
         </div>

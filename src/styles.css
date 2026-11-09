@@ -112,8 +112,28 @@
   --sidebar-ring: oklch(0.6 0.04 60);
   --hero-foreground: oklch(1 0 0);
   --hero-shade: oklch(0.17 0.014 59);
-  --hero-overlay: linear-gradient(90deg, color-mix(in oklab, var(--hero-shade) 94%, transparent) 0%, color-mix(in oklab, var(--hero-shade) 72%, transparent) 35%, color-mix(in oklab, var(--hero-shade) 8%, transparent) 72%), linear-gradient(180deg, color-mix(in oklab, var(--hero-shade) 65%, transparent), transparent 28%, transparent 75%, color-mix(in oklab, var(--hero-shade) 55%, transparent));
-  --hero-mobile-overlay: linear-gradient(180deg, color-mix(in oklab, var(--hero-shade) 60%, transparent), transparent 22%, color-mix(in oklab, var(--hero-shade) 18%, transparent) 37%, color-mix(in oklab, var(--hero-shade) 88%, transparent) 60%, color-mix(in oklab, var(--hero-shade) 96%, transparent));
+  --hero-overlay:
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--hero-shade) 94%, transparent) 0%,
+      color-mix(in oklab, var(--hero-shade) 72%, transparent) 35%,
+      color-mix(in oklab, var(--hero-shade) 8%, transparent) 72%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--hero-shade) 65%, transparent),
+      transparent 28%,
+      transparent 75%,
+      color-mix(in oklab, var(--hero-shade) 55%, transparent)
+    );
+  --hero-mobile-overlay: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--hero-shade) 60%, transparent),
+    transparent 22%,
+    color-mix(in oklab, var(--hero-shade) 18%, transparent) 37%,
+    color-mix(in oklab, var(--hero-shade) 88%, transparent) 60%,
+    color-mix(in oklab, var(--hero-shade) 96%, transparent)
+  );
 }
 
 @layer base {
@@ -171,51 +191,189 @@
   transform: translateY(0);
 }
 
-.site-header { color: var(--hero-foreground); }
-.brand-name { line-height: 1.15; }
-.brand-detail { display: block; font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.5rem; }
-.header-link { opacity: 0.85; transition: opacity 180ms ease; }
-.header-link:hover { opacity: 1; }
-.header-menu { color: var(--hero-foreground); }
-.header-menu:hover { background: color-mix(in oklab, var(--hero-foreground) 12%, transparent); color: var(--hero-foreground); }
-.office-hero { position: relative; isolation: isolate; min-height: 100svh; display: flex; align-items: center; overflow: hidden; background: var(--hero-shade); color: var(--hero-foreground); }
-.hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-.hero-overlay { position: absolute; inset: 0; background: var(--hero-overlay); }
-.hero-inner { position: relative; padding-top: 10rem; padding-bottom: 8rem; }
-.hero-copy { max-width: 35rem; }
-.hero-title { font-size: 4.5rem; line-height: 1.04; text-wrap: balance; }
-.hero-title em { color: var(--accent); }
-.hero-subtitle { max-width: 27rem; margin-top: 2rem; font-size: 1rem; font-weight: 300; line-height: 1.8; }
-.hero-action { margin-top: 2.5rem; }
-.hero-contact { background: var(--background); color: var(--foreground); border: 1px solid var(--background); }
-.hero-contact:hover { background: var(--secondary); color: var(--foreground); }
-.hero-scroll { position: absolute; bottom: 2rem; left: 50%; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 1px solid color-mix(in oklab, var(--hero-foreground) 40%, transparent); transform: translateX(-50%); font-size: 1.3rem; }
-.hero-enter { animation: hero-reveal 850ms cubic-bezier(0.2, 0.65, 0.3, 1) both; }
-.hero-title { animation-delay: 550ms; }
-.hero-subtitle { animation-delay: 1000ms; }
-.hero-action { animation-delay: 1400ms; }
-@keyframes hero-reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-@media (min-width: 1024px) {
-  .hero-photo { left: 32%; width: 68%; object-position: center 18%; }
+.site-header {
+  color: var(--hero-foreground);
 }
-@media (min-width: 1600px) { .hero-copy { max-width: 39rem; } .hero-title { font-size: 5.25rem; } }
+.brand-name {
+  line-height: 1.15;
+}
+.brand-detail {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+.header-link {
+  opacity: 0.85;
+  transition: opacity 180ms ease;
+}
+.header-link:hover {
+  opacity: 1;
+}
+.header-menu {
+  color: var(--hero-foreground);
+}
+.header-menu:hover {
+  background: color-mix(in oklab, var(--hero-foreground) 12%, transparent);
+  color: var(--hero-foreground);
+}
+.office-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--hero-shade);
+  color: var(--hero-foreground);
+}
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay);
+}
+.hero-inner {
+  position: relative;
+  padding-top: 10rem;
+  padding-bottom: 8rem;
+}
+.hero-copy {
+  max-width: 35rem;
+}
+.hero-title {
+  font-size: 4.5rem;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+.hero-title em {
+  color: var(--accent);
+}
+.hero-subtitle {
+  max-width: 27rem;
+  margin-top: 2rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+.hero-action {
+  margin-top: 2.5rem;
+}
+.hero-contact {
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--background);
+}
+.hero-contact:hover {
+  background: var(--secondary);
+  color: var(--foreground);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid color-mix(in oklab, var(--hero-foreground) 40%, transparent);
+  transform: translateX(-50%);
+  font-size: 1.3rem;
+}
+.hero-enter {
+  animation: hero-reveal 850ms cubic-bezier(0.2, 0.65, 0.3, 1) both;
+}
+.hero-title {
+  animation-delay: 550ms;
+}
+.hero-subtitle {
+  animation-delay: 1000ms;
+}
+.hero-action {
+  animation-delay: 1400ms;
+}
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (min-width: 1024px) {
+  .hero-photo {
+    left: 32%;
+    width: 68%;
+    object-position: center 18%;
+  }
+}
+@media (min-width: 1600px) {
+  .hero-copy {
+    max-width: 39rem;
+  }
+  .hero-title {
+    font-size: 5.25rem;
+  }
+}
 @media (max-width: 1023px) {
-  .office-hero { align-items: flex-end; }
-  .hero-photo { object-position: 58% top; }
-  .hero-overlay { background: var(--hero-mobile-overlay); }
-  .hero-inner { padding-top: max(19rem, 43svh); padding-bottom: 5.5rem; }
-  .hero-copy { max-width: 34rem; }
-  .hero-title { font-size: 3.5rem; }
-  .hero-scroll { bottom: 1rem; }
+  .office-hero {
+    align-items: flex-end;
+  }
+  .hero-photo {
+    object-position: 58% top;
+  }
+  .hero-overlay {
+    background: var(--hero-mobile-overlay);
+  }
+  .hero-inner {
+    padding-top: max(19rem, 43svh);
+    padding-bottom: 5.5rem;
+  }
+  .hero-copy {
+    max-width: 34rem;
+  }
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  .hero-scroll {
+    bottom: 1rem;
+  }
 }
 @media (max-width: 600px) {
-  .hero-title { font-size: 2.65rem; line-height: 1.03; }
-  .hero-subtitle { font-size: 0.875rem; line-height: 1.65; margin-top: 1.3rem; }
-  .hero-action { margin-top: 1.5rem; }
-  .hero-inner { padding-top: max(17rem, 43svh); padding-bottom: 5rem; }
+  .hero-title {
+    font-size: 2.65rem;
+    line-height: 1.03;
+  }
+  .hero-subtitle {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    margin-top: 1.3rem;
+  }
+  .hero-action {
+    margin-top: 1.5rem;
+  }
+  .hero-inner {
+    padding-top: max(17rem, 43svh);
+    padding-bottom: 5rem;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-enter { animation: none; opacity: 1; transform: none; }
+  .hero-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
   html {
     scroll-behavior: auto;
   }

@@ -17,7 +17,19 @@ export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encod
 export const MAPS_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&output=embed`;
 export const OFFICE_PHOTO = "/images/marcus-luz-advogado.jpg";
 export const OFFICE_SERVICES = [
-  { name: "Direito Militar", description: "Orientação jurídica em questões relacionadas à carreira e aos direitos de servidores militares." },
-  { name: "Direito Previdenciário", description: "Orientação sobre benefícios, aposentadorias e demais questões junto à previdência." },
-  { name: "Direito Civil", description: "Assessoria em relações contratuais, obrigações, responsabilidade civil e demais temas do direito privado." },
+  {
+    name: "Direito Militar",
+    description:
+      "Orientação jurídica em questões relacionadas à carreira e aos direitos de servidores militares.",
+  },
+  {
+    name: "Direito Previdenciário",
+    description:
+      "Orientação sobre benefícios, aposentadorias e demais questões junto à previdência.",
+  },
+  {
+    name: "Direito Civil",
+    description:
+      "Assessoria em relações contratuais, obrigações, responsabilidade civil e demais temas do direito privado.",
+  },
 ];
