@@ -1,5 +1,8 @@
 # Revisão do site
 
+- [ ] Reformular primeira tela com foto dominante, entrada progressiva e cabeçalho sobreposto; restaurar serviços e endereço confirmados.
+- [ ] Conferir visual e atualização da prévia, foto, movimento reduzido, menu e WhatsApp nos três tamanhos; testes, lint e compilação automática, sem publicar.
+
 - [x] Implementar menu mobile acessível e preservar navegação desktop.
 - [x] Disponibilizar a foto original no caminho local solicitado, sem alteração (hash verificado).
 - [x] Centralizar contato e neutralizar informações não confirmadas.

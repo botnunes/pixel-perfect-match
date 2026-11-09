@@ -6,6 +6,7 @@ import {
   MAPS_URL,
   OFFICE_ADDRESS_CONFIRMED,
   PUBLIC_OFFICE_ADDRESS,
+  OFFICE_SERVICES,
 } from "@/lib/office";
 
 describe("Office contact", () => {
@@ -15,9 +16,15 @@ describe("Office contact", () => {
     expect(WHATSAPP_DISPLAY).toBe("+55 (67) 99220-9167");
   });
 
-  it("keeps the unconfirmed full address and map disabled, exposing only the city", () => {
-    expect(OFFICE_ADDRESS_CONFIRMED).toBe(false);
-    expect(PUBLIC_OFFICE_ADDRESS).toBe("Campo Grande — MS");
+  it("exposes the confirmed full office address and enables the map", () => {
+    expect(OFFICE_ADDRESS_CONFIRMED).toBe(true);
+    expect(PUBLIC_OFFICE_ADDRESS).toBe("Rua General Osório, 52 — Centro, Campo Grande — MS, CEP 79008-310");
+  });
+
+  it("offers exactly the three confirmed legal practice areas", () => {
+    expect(OFFICE_SERVICES.map(service => service.name)).toEqual([
+      "Direito Militar", "Direito Previdenciário", "Direito Civil",
+    ]);
   });
 
   it("prefills the exact requested WhatsApp message", () => {
@@ -26,9 +33,9 @@ describe("Office contact", () => {
     );
   });
 
-  it("does not present the unconfirmed neighborhood in the Maps query", () => {
+  it("uses the confirmed address and neighborhood for Maps", () => {
     expect(new URL(MAPS_URL).searchParams.get("query")).toBe(
-      "Rua General Osório, 52, Campo Grande - MS, 79008-310",
+      "Rua General Osório, 52, Centro, Campo Grande - MS, 79008-310",
     );
   });
 });
