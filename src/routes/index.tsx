@@ -6,7 +6,8 @@ import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetClose } from "@/com
 import {
   WHATSAPP_URL,
   WHATSAPP_DISPLAY,
-  OFFICE_ADDRESS,
+  PUBLIC_OFFICE_ADDRESS,
+  OFFICE_ADDRESS_CONFIRMED,
   MAPS_URL,
   MAPS_EMBED,
   OFFICE_PHOTO,
@@ -45,24 +46,6 @@ const nav = [
   ["Profissional", "#profissional"],
   ["Localização", "#localizacao"],
   ["Contato", "#contato"],
-];
-
-const areas = [
-  [
-    "I",
-    "Direito Militar",
-    "Orientação jurídica em questões relacionadas à carreira e aos direitos de servidores militares.",
-  ],
-  [
-    "II",
-    "Direito Previdenciário",
-    "Orientação sobre benefícios, aposentadorias e demais questões junto à previdência.",
-  ],
-  [
-    "III",
-    "Direito Civil",
-    "Assessoria em relações contratuais, obrigações, responsabilidade civil e demais temas do direito privado.",
-  ],
 ];
 
 function CTA() {
@@ -202,17 +185,12 @@ function Index() {
         <h2 className="mt-5 max-w-xl text-4xl text-foreground md:text-5xl">
           Informações sobre atuação jurídica.
         </h2>
-        <p className="mt-6 max-w-xl text-sm text-muted-foreground">
-          Áreas e descrições apresentadas abaixo pendentes de aprovação pelo profissional.
-        </p>
-        <div className="mt-16 divide-y divide-border border-y border-border">
-          {areas.map(([n, t, d]) => (
-            <div key={t} className="grid gap-4 py-10 md:grid-cols-12 md:items-baseline">
-              <span className="font-serif text-xl italic text-primary md:col-span-1">{n}</span>
-              <h3 className="text-3xl text-foreground md:col-span-4">{t}</h3>
-              <p className="font-light text-muted-foreground md:col-span-6 md:col-start-7">{d}</p>
-            </div>
-          ))}
+        <div className="mt-16 border-y border-border py-10">
+          <p className="max-w-3xl text-lg font-light leading-relaxed text-muted-foreground">
+            A atuação profissional envolve a análise individual de cada situação, considerando suas
+            particularidades e as normas aplicáveis. Para informações sobre os serviços oferecidos,
+            entre em contato com o escritório.
+          </p>
         </div>
       </section>
 
@@ -225,9 +203,6 @@ function Index() {
               Marcus Vinicius Rodrigues da Luz
             </h2>
             <p className="mt-4 text-sm tracking-widest text-primary">ADVOGADO · OAB/MS 17.787</p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Registro profissional pendente de confirmação pelo escritório.
-            </p>
           </div>
           <p className="text-lg font-light leading-relaxed text-muted-foreground md:col-span-6 md:col-start-7 md:pt-12">
             Para informações sobre o profissional, a forma de atendimento e a análise de uma questão
@@ -244,27 +219,24 @@ function Index() {
         <div className="md:col-span-4">
           <p className="eyebrow">Localização</p>
           <h2 className="mt-5 text-4xl text-foreground md:text-5xl">Em Campo Grande — MS.</h2>
-          <p className="mt-6 font-light text-muted-foreground">{OFFICE_ADDRESS}</p>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Endereço pendente de confirmação. Confirme com o escritório antes de se deslocar.
-          </p>
-          <a
+          <p className="mt-6 font-light text-muted-foreground">{PUBLIC_OFFICE_ADDRESS}</p>
+          {OFFICE_ADDRESS_CONFIRMED && <a
             href={MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-8 inline-block border-b border-primary pb-1 text-sm text-primary hover:text-foreground"
           >
             Abrir no Google Maps →
-          </a>
+          </a>}
         </div>
-        <div className="md:col-span-7 md:col-start-6">
+        {OFFICE_ADDRESS_CONFIRMED && <div className="md:col-span-7 md:col-start-6">
           <iframe
-            title="Mapa do endereço informado, pendente de confirmação pelo escritório"
+            title="Localização do escritório"
             src={MAPS_EMBED}
             className="aspect-[4/3] w-full border-0 grayscale-[60%] sepia-[20%]"
             loading="lazy"
           />
-        </div>
+        </div>}
       </section>
 
       {/* Contato */}
@@ -284,14 +256,11 @@ function Index() {
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                   {WHATSAPP_DISPLAY}
                 </a>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Número pendente de confirmação pelo escritório.
-                </p>
               </dd>
             </div>
             <div>
-              <dt className="eyebrow">Endereço</dt>
-              <dd className="mt-2 text-lg">{OFFICE_ADDRESS}</dd>
+              <dt className="eyebrow">Localização</dt>
+              <dd className="mt-2 text-lg">{PUBLIC_OFFICE_ADDRESS}</dd>
             </div>
           </dl>
         </div>
