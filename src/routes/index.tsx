@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetClose } from "@/components/ui/sheet";
@@ -37,6 +37,7 @@ export const Route = createFileRoute("/")({
       { property: "og:image:alt", content: "Marcus Vinicius Rodrigues da Luz, de terno azul" },
       { name: "twitter:image", content: SHARE_PHOTO },
     ],
+    links: [{ rel: "preload", as: "image", href: OFFICE_PHOTO, fetchPriority: "high" }],
   }),
   component: Index,
 });
@@ -47,7 +48,7 @@ const nav = [
   ["Profissional", "#profissional"],
   ["Localização", "#localizacao"],
   ["Contato", "#contato"],
-];
+] as const;
 
 function CTA({ hero = false }: { hero?: boolean }) {
   return (
@@ -69,9 +70,11 @@ function CTA({ hero = false }: { hero?: boolean }) {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  // Closing the menu returns focus to its button at the top; scroll to the chosen section instead.
+  const pendingSection = useRef<string | null>(null);
   return (
     <div className="min-h-screen">
-      <header className="site-header absolute inset-x-0 top-0 z-10">
+      <header className="site-header header-enter absolute inset-x-0 top-0 z-10">
         <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 py-6 md:px-10">
           <a href="#inicio" className="brand-name min-w-0 font-serif text-xl">
             Marcus Luz <span className="italic">&amp;</span> Advogados
@@ -102,6 +105,13 @@ function Index() {
               side="right"
               aria-describedby={undefined}
               className="w-[min(85vw,24rem)]"
+              onCloseAutoFocus={(event) => {
+                const target = pendingSection.current;
+                if (!target) return;
+                pendingSection.current = null;
+                event.preventDefault();
+                document.querySelector(target)?.scrollIntoView();
+              }}
             >
               <SheetTitle className="pr-12 font-serif text-2xl font-medium">
                 Marcus Luz &amp; Advogados
@@ -112,7 +122,13 @@ function Index() {
               >
                 {nav.map(([label, href]) => (
                   <SheetClose asChild key={href}>
-                    <a href={href} className="flex min-h-12 items-center py-4 text-foreground">
+                    <a
+                      href={href}
+                      onClick={() => {
+                        pendingSection.current = href;
+                      }}
+                      className="flex min-h-12 items-center py-4 text-foreground"
+                    >
                       {label}
                     </a>
                   </SheetClose>
@@ -124,19 +140,28 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section id="inicio" className="office-hero">
-        <img
-          src={OFFICE_PHOTO}
-          alt="Marcus Vinicius Rodrigues da Luz, advogado, de terno azul"
-          className="hero-photo"
-          fetchPriority="high"
-          width={470}
-          height={540}
-        />
+      <section id="inicio" className="office-hero" aria-labelledby="hero-title">
+        <div className="hero-media">
+          {/* The same original photo, softened, fills the screen without enlarging the portrait. */}
+          <img src={OFFICE_PHOTO} alt="" className="hero-ambient" decoding="async" />
+          <img
+            src={OFFICE_PHOTO}
+            alt="Marcus Vinicius Rodrigues da Luz, advogado, de terno azul"
+            className="hero-photo"
+            fetchPriority="high"
+            decoding="async"
+            width={470}
+            height={540}
+          />
+        </div>
         <div className="hero-overlay" aria-hidden="true" />
         <div className="hero-inner mx-auto w-full max-w-7xl px-6 md:px-10">
           <div className="hero-copy">
-            <h1 className="hero-title hero-enter">
+            <p className="hero-eyebrow hero-enter">
+              <span aria-hidden="true" className="hero-rule" />
+              Escritório de advocacia
+            </p>
+            <h1 id="hero-title" className="hero-title hero-enter">
               Advocacia com compromisso, <em>ética</em> e responsabilidade.
             </h1>
             <p className="hero-subtitle hero-enter">
@@ -145,6 +170,9 @@ function Index() {
             </p>
             <div className="hero-action hero-enter">
               <CTA hero />
+              <a href="#atuacao" className="hero-secondary">
+                Áreas de atuação
+              </a>
             </div>
           </div>
         </div>

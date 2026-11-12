@@ -32,3 +32,4 @@ use the editor.
 - Keep office contact data in a shared browser-safe module so display text and outgoing links cannot diverge.
 - Use the original local portrait in public/images for portable hosting; sharing metadata must reference a real existing host, never an invented canonical domain.
 - Place the single primary main landmark in the root layout and use the existing accessible dialog primitive for mobile navigation.
+- Hero portrait renders near its native size over a blurred copy of the same photo, never cover-scaled to full screen: the only original is low-resolution and upscaling pixelates it.
